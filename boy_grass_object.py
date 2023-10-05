@@ -2,6 +2,17 @@ from pico2d import *
 
 # Game object class here
 
+class Grass:
+    def __init__(self):
+        self.image = load_image('grass.png')
+
+    def draw(self):
+        self.image.draw(400, 30)
+
+    def update(self): pass
+
+
+
 def handle_events():
     global running
     events = get_events()
@@ -14,8 +25,28 @@ def handle_events():
 open_canvas()
 
 # initialization code
+def reset_world():
+    global running
+
+    running = True
+
+def update_world():
+    pass
+
+def render_world():
+    clear_canvas()
+    update_canvas()
+
+open_canvas()
+
+reset_world()
 
 # game main loop code
+while running:
+    handle_events()
+    update_world()
+    render_world()
+    delay(0.05)
 
 # finalization code
 
