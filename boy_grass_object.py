@@ -3,7 +3,7 @@ from pico2d import *
 # Game object class here
 
 class Grass:
-    def __init__(self):
+    def __init__(self): #생성자 함수 : ppt 참고
         self.image = load_image('grass.png')
 
     def draw(self):
@@ -11,7 +11,18 @@ class Grass:
 
     def update(self): pass
 
+class Boy:
+    def __init__(self):
+        self.x, self.y = 0, 90
+        self.frame = 0
+        self.image = load_image('run_animation.png')
 
+    def update(self):
+        self.frame = (self.frame + 1) % 8
+        self.x += 5
+
+    def draw(self):
+        self.image.clip_draw(self.frame*100, 0, 100, 100, self.x, self.y)
 
 def handle_events():
     global running
@@ -27,14 +38,22 @@ open_canvas()
 # initialization code
 def reset_world():
     global running
+    global grass
+    global boy
 
     running = True
+    grass = Grass()
+    boy = Boy()
 
 def update_world():
+    grass.update()
+    boy.update()
     pass
 
 def render_world():
     clear_canvas()
+    grass.draw()
+    boy.draw()
     update_canvas()
 
 open_canvas()
